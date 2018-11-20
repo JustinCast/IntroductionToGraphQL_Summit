@@ -4,7 +4,8 @@
   "description": "Hey, I'm gonna teach some GraphQL basics at San Carlos Technology Summit 2018",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev:server": "nodemon index.js",
+    "json:server": "json-server --watch notes.json"
   },
   "repository": {
     "type": "git",

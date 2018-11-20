@@ -1,0 +1,25 @@
+{
+  "notes": [
+    {
+      "id": "1",
+      "title": "Summit course on Friday at 3:00 pm",
+      "body": "Don't forget your course on San Carlos Technology Summit",
+      "author": "JustinCast",
+      "created_at": "no date"
+    },
+    {
+      "id": "2",
+      "title": "Time to relax",
+      "body": "You need to relax after your course on Summit, what if you play Need for Speed at nite?",
+      "author": "JustinCast",
+      "created_at": "no date"
+    },
+    {
+      "title": "Meeting at 1 pm",
+      "body": "You have a meeting in the saloon",
+      "author": "JustinCast",
+      "created_at": "2018-11-20T14:15:29.470Z",
+      "id": "SHq3ZbC"
+    }
+  ]
+}
