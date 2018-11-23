@@ -1,7 +1,6 @@
 const {
   GraphQLObjectType,
   GraphQLString,
-  GraphQLInt,
   GraphQLSchema,
   GraphQLList,
   GraphQLNonNull
@@ -25,8 +24,20 @@ const RootQuery = new GraphQLObjectType({
     notes: {
       type: new GraphQLList(NoteType),
       resolve(parentValue, args) {
-        return axios.get('http://localhost:3000/notes')
-        .then(notes => notes.data)
+        return axios
+          .get("http://localhost:3000/notes")
+          .then(notes => notes.data);
+      }
+    },
+    singleNote: {
+      type: NoteType,
+      args: {
+        id: { type: GraphQLString }
+      },
+      resolve(parentValue, args) {
+        return axios
+          .get(`http://localhost:3000/notes/${args.id}`)
+          .then(note => note.data);
       }
     }
   }
@@ -44,13 +55,14 @@ const mutation = new GraphQLObjectType({
         created_at: { type: GraphQLString }
       },
       resolve(parentValue, args) {
-        return axios.post("http://localhost:3000/notes", {
-          title: args.title,
-          body: args.body,
-          author: args.author,
-          created_at: new Date()
-        })
-        .then(note => note.data);
+        return axios
+          .post("http://localhost:3000/notes", {
+            title: args.title,
+            body: args.body,
+            author: args.author,
+            created_at: new Date()
+          })
+          .then(note => note.data);
       }
     },
     editNote: {
@@ -63,18 +75,20 @@ const mutation = new GraphQLObjectType({
         created_at: { type: GraphQLString }
       },
       resolve(parentValue, args) {
-        return axios.put(`http://localhost:3000/notes/${args.id}`, args)
-        .then(notes => notes.data);
+        return axios
+          .put(`http://localhost:3000/notes/${args.id}`, args)
+          .then(notes => notes.data);
       }
     },
     deleteNote: {
       type: NoteType,
-      args: { 
+      args: {
         id: { type: new GraphQLNonNull(GraphQLString) }
       },
       resolve(parentValue, args) {
-        return axios.delete(`http://localhost:3000/notes/${args.id}`)
-        .then(notes => notes.data);
+        return axios
+          .delete(`http://localhost:3000/notes/${args.id}`)
+          .then(notes => notes.data);
       }
     }
   }
