@@ -11,6 +11,7 @@ const axios = require("axios");
 const NoteType = new GraphQLObjectType({
   name: "Note",
   fields: () => ({
+    id: {type:GraphQLString},
     title: { type: GraphQLString },
     body: { type: GraphQLString },
     author: { type: GraphQLString },
@@ -23,7 +24,7 @@ const RootQuery = new GraphQLObjectType({
   fields: {
     notes: {
       type: new GraphQLList(NoteType),
-      resolve(parentValue, args) {
+      resolve() {
         return axios
           .get("http://localhost:3000/notes")
           .then(notes => notes.data);
@@ -34,7 +35,7 @@ const RootQuery = new GraphQLObjectType({
       args: {
         id: { type: GraphQLString }
       },
-      resolve(parentValue, args) {
+      resolve(parent, args) {
         return axios
           .get(`http://localhost:3000/notes/${args.id}`)
           .then(note => note.data);
